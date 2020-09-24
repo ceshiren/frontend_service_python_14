@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import http from "@/http";
+
 export default {
   name: "Login",
   props: {
@@ -60,23 +62,23 @@ export default {
       console.log(this);
       console.log(this.username);
       console.log(this.password);
-    //   http
-    //     .post("/login", {
-    //       username: this.username,
-    //       password: this.password,
-    //     })
-    //     .then((res) => {
-        //   console.log(res);
-        //   if (res.data.errcode === 0) {
-        //     //todo: jump
-        //     localStorage.setItem("token", res.data.data.token);
-        //     console.log(localStorage.getItem("token"));
-        //     this.$router.push("dashboard");
-        //   } else {
-        //     //alert error
-        //     window.alert("username or passowrd error");
-        //   }
-        // });
+      http
+        .post("/login", {
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.errcode === 0) {
+            //如果errcode=0 就把正确结果的token保存到localStorage中
+            localStorage.setItem("token", res.data.token);
+            console.log(localStorage.getItem("token"));
+            this.$router.push("demo");
+          } else {
+            //alert error
+            window.alert("username or passowrd error");
+          }
+        });
     },
   },
 };

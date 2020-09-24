@@ -1,11 +1,6 @@
 <template>
   <v-app>
-
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
+    <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -39,16 +34,18 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <HelloWorld />
     </v-main>
+    <div>{{info}}</div>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld';
+import HelloWorld from "@/components/HelloWorld";
+import http from "@/http";
 
 export default {
-  name: 'Demo',
+  name: "Demo",
 
   components: {
     HelloWorld,
@@ -57,5 +54,10 @@ export default {
   data: () => ({
     //
   }),
+  mounted() {
+    http
+      .get("/testcase")
+      .then((response) => (this.info = response));
+  },
 };
 </script>
