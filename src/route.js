@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from './components/Login'
-import Demo  from './components/Demo'
-import DashBoard  from './components/DashBoard'
+import Demo from './components/Demo'
+import DashBoard from './components/DashBoard'
 
+import TestCase from './components/TestCase'
 
 Vue.use(VueRouter)
 
@@ -25,7 +26,13 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/', component: Login },
   { path: '/demo', component: Demo },
-  { path: '/dashboard', component: DashBoard }
+  {
+    path: '/dashboard', component: DashBoard,
+    children: [
+      { path: 'testcase', component: TestCase }
+    ]
+  },
+
 ]
 
 // 3. 创建 router 实例，然后传 `routes` 配置
